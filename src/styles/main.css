@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.rounded-tips::after {
+  @apply rounded-full absolute bg-gray-900;
+  content: "";
+  width: 4px;
+  height: 4px;
+}
+
+.rounded-tips.big::after {
+  width: 8px;
+  height: 8px;
+}
+
+.rounded-tips.top::after{
+  @apply -top-0.5 left-full
+}
+
+.rounded-tips.big.top::after{
+  @apply -top-1
+}
+
+.rounded-tips.right::after{
+  @apply -right-0.5 top-full
+}
+
+.rounded-tips.big.right::after{
+  @apply -right-1
+}
+
+.rounded-tips.bottom::after{
+  @apply -bottom-0.5 right-full
+}
+
+.rounded-tips.big.bottom::after{
+  @apply -bottom-1
+}
+
+.rounded-tips.left::after{
+  @apply -left-0.5 bottom-full
+}
+
+.rounded-tips.big.left::after{
+  @apply -left-1
+}
