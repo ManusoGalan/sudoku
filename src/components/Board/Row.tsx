@@ -12,7 +12,7 @@ function Row(props: RowProps) {
 
   const cells: JSX.Element[] = [...Array(3)];
 
-  return <div className="flex basis-1/3 h-1/3">
+  return <div className="grid grid-cols-3">
     {cells.map((val, index) => {
       return <Cell
         key={`cell-${index}-in-${id}`}
@@ -36,11 +36,11 @@ const getTipsPosition = (row: number, col: number): string => {
 const getBorderOverride = (row: number, col: number): string => {
   let borderOverride: string = '';
 
-  if (row == 0) borderOverride += 'border-t-transparent ';
-  else if (row == 2) borderOverride += 'border-b-transparent ';
+  if (row == 0) borderOverride += 'border-t-0 ';
+  else if (row == 2) borderOverride += 'border-b-0 ';
 
-  if (col == 0) borderOverride += 'border-l-transparent ';
-  else if (col == 2) borderOverride += 'border-r-transparent ';
+  if (col == 0) borderOverride += 'border-l-0 ';
+  else if (col == 2) borderOverride += 'border-r-0 ';
 
   return borderOverride;
 }

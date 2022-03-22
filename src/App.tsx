@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Selector from './ui/Select';
 import Sudoku from './components/Board/Sudoku';
 import DifficultyLevels from './@types/DifficultyLevelsEnum';

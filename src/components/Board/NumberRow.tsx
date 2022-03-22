@@ -14,7 +14,7 @@ function NumberRow(props: NumberRowProps) {
   const rowOfNumbers: JSX.Element[] = [...Array(3)];
 
   return (
-    <div className="flex basis-1/3 h-1/3">
+    <div className="grid grid-cols-3">
       {rowOfNumbers.map((val, index) => {
         return (
           <Number
@@ -31,8 +31,8 @@ function NumberRow(props: NumberRowProps) {
 const getXBorderOverride = (col: number): string => {
   let xBorderOverride = '';
 
-  //if (col == 0) xBorderSubstract = 'border-l-transparent';
-  //else if (col == 2) xBorderSubstract = 'border-r-transparent';
+  if (col == 0) xBorderOverride = 'border-l-0';
+  else if (col == 2) xBorderOverride = 'border-r-0';
 
   return xBorderOverride;
 };

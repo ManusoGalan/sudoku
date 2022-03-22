@@ -60,7 +60,6 @@ function Selector(props: SelectorProps) {
                     href="#"
                     className="block px-2 py-2 hover:bg-slate-700 hover:text-white overflow-hidden rounded-t"
                     onClick={() => {
-                      sudokuService.toogleLoading();
                       sudokuService.setDifficulty(val);
                     }}
                   >
@@ -73,7 +72,6 @@ function Selector(props: SelectorProps) {
                     href="#"
                     className="block px-2 py-2 hover:bg-slate-700 hover:text-white overflow-hidden rounded-b"
                     onClick={() => {
-                      sudokuService.toogleLoading();
                       sudokuService.setDifficulty(val);
                     }}
                   >
@@ -86,7 +84,6 @@ function Selector(props: SelectorProps) {
                     href="#"
                     className="block px-2 py-2 hover:bg-slate-700 hover:text-white overflow-hidden"
                     onClick={() => {
-                      sudokuService.toogleLoading();
                       sudokuService.setDifficulty(val);
                     }}
                   >

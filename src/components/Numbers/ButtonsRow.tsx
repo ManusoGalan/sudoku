@@ -12,7 +12,7 @@ function ButtonRow(props: ButtonsProps) {
   return (
     <div className="w-full flex mb-2">
       {buttons.map((val) => (
-        <Button buttonType={val.type}>{val.text}</Button>
+        <Button buttonType={val.type} value={val.value}>{val.text}</Button>
       ))}
     </div>
   );

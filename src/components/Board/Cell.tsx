@@ -16,9 +16,8 @@ function Cell(props: CellProps) {
 
   return (
     <div
-      className={`border-2 border-gray-900 relative flex flex-col basis-1/3 w-1/3
-        ${/*roundedTipPosition != '' ? `rounded-tips big ${roundedTipPosition}` : ''*/''}
-        ${borderOverride}`}
+      className={`border-2 border-gray-900 relative grid grid-rows-3
+      ${borderOverride}`}
     >
       {rowOfNumbers.map((val, index) => {
         return (
@@ -37,10 +36,10 @@ function Cell(props: CellProps) {
 const getYBorderOverride = (row: number): string => {
   let yBorderOverride = '';
 
-    //if (row == 0) borderSubstract = 'border-t-transparent';
-    //else if (row == 2) borderSubstract = 'border-b-transparent';
+  if (row == 0) yBorderOverride = 'border-t-0';
+  else if (row == 2) yBorderOverride = 'border-b-0';
 
   return yBorderOverride;
-}
+};
 
 export default Cell;

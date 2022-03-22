@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import DifficultyLevels from '../@types/DifficultyLevelsEnum';
+import { Success } from '../components/Success';
 import ISudokuService from './ISudokuService';
 
 interface SudokuProviderProps {
@@ -9,13 +10,14 @@ interface SudokuProviderProps {
 }
 
 const SudokuContext = createContext<ISudokuService>({
-  getDifficulty: () => {},
-  getSolvedSudoku: () => {},
   getInitialSudoku: () => {},
-  getUserSudoku: () => {},
+  getSolvedSudoku: () => {},
+  getDifficulty: () => {},
   setDifficulty: () => {},
+  getUserSudoku: () => {},
   setUserSudoku: () => {},
-  toogleLoading: () => {},
+  getSelectedPosition: () => {},
+  setSelectedPosition: () => {}
 });
 
 function SudokuProvider(props: SudokuProviderProps) {
@@ -24,8 +26,9 @@ function SudokuProvider(props: SudokuProviderProps) {
   const [userGrid, setUserGrid] = useState(getEmptyArray());
   const [solvedGrid, setSolvedGrid] = useState(getEmptyArray());
   const [initialGrid, setInitialGrid] = useState(getEmptyArray());
+  const [selectedPosition, setSelectedPosition] = useState(-1);
 
-  const [difficultyLevel, setDifficultyLevel] = useState(DifficultyLevels.medium);
+  const [difficultyLevel, _setDifficultyLevel] = useState(DifficultyLevels.medium);
   const [loading, setLoading] = useState(true);
 
   const solvedGridProvider: Function = fillGridMock || fillGrid;
@@ -54,31 +57,46 @@ function SudokuProvider(props: SudokuProviderProps) {
   }, [difficultyLevel]);
 
   const value: ISudokuService = {
-    getDifficulty: () => {
-      return difficultyLevel;
+    getInitialSudoku: () => {
+      return initialGrid;
     },
     getSolvedSudoku: () => {
       return solvedGrid;
     },
-    getInitialSudoku: () => {
-      return initialGrid;
+    getDifficulty: () => {
+      return difficultyLevel;
+    },
+    setDifficulty: (difficultyLevel: DifficultyLevels) => {
+      setDifficultyLevel(setLoading, _setDifficultyLevel, difficultyLevel);
     },
     getUserSudoku: () => {
       return userGrid;
     },
-    setDifficulty: (difficultyLevel: DifficultyLevels) => {
-      setDifficultyLevel(difficultyLevel);
-    },
     setUserSudoku: (newSudoku: Array<number>) => {
       setUserGrid(newSudoku);
     },
-    toogleLoading: () => {
-      setLoading(true);
+    getSelectedPosition: () => {
+      return selectedPosition;
     },
+    setSelectedPosition: (newPosition: number) => {
+      setSelectedPosition(newPosition);
+    }
   };
 
+  const isSolved = !loading ? userGrid.every((val, index) => val == solvedGrid[index]) : false;
+
+  if (isSolved) return <Success>{children}</Success>
   if (!loading) return <SudokuContext.Provider value={value}>{children}</SudokuContext.Provider>;
   return <div></div>;
+}
+
+const setDifficultyLevel = (
+  loadingSetter: Function,
+  difficultyLevelSetter: Function,
+  newDifficultyLevel: DifficultyLevels,
+) => {
+  loadingSetter(true);
+  difficultyLevelSetter(newDifficultyLevel);
 };
 
 const useSudoku = () => {
